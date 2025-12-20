@@ -1,0 +1,25 @@
+@import "tailwindcss";
+
+/* ===== THEME TOKENS ===== */
+@theme {
+  --color-bg: 241 245 249;      /* slate-100 */
+  --color-surface: 255 255 255; /* white */
+  --color-text: 15 23 42;       /* slate-900 */
+  --color-muted: 100 116 139;   /* slate-500 */
+}
+
+/* Dark mode */
+html.dark {
+  @theme {
+    --color-bg: 15 23 42;       /* slate-900 */
+    --color-surface: 30 41 59;  /* slate-800 */
+    --color-text: 226 232 240;  /* slate-200 */
+    --color-muted: 148 163 184; /* slate-400 */
+  }
+}
+
+/* Base */
+html, body {
+  background-color: rgb(var(--color-bg));
+  color: rgb(var(--color-text));
+}
