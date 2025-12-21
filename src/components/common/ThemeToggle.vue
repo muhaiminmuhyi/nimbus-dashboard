@@ -2,6 +2,8 @@
   <button
     class="px-3 py-1.5 rounded-md text-sm border"
     @click="toggle"
+    :aria-pressed="isDark"
+    aria-label="Toggle dark mode"
   >
     {{ isDark ? '🌙 Dark' : '☀️ Light' }}
   </button>
