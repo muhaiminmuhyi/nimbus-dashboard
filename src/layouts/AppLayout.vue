@@ -13,6 +13,7 @@
         <NavItem label="Dashboard" to="/" />
         <NavItem label="Users" to="/users" />
         <NavItem label="Billing" to="/billing" />
+        <NavItem label="Analytics" to="/analytics" />
         <NavItem label="Settings" to="/settings" />
       </nav>
     </aside>

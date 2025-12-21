@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import AppLayout from '../layouts/AppLayout.vue'
-import { usePermissions } from '../features/permissions/setPermissions'
+import { usePermissions } from '../features/permissions/usePermissions'
 
 const { roles, modules, permissions } = usePermissions()
 </script>
