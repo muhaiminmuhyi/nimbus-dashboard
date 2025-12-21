@@ -4,6 +4,7 @@ import Dashboard from '../pages/Dashboard.vue'
 import Users from '../pages/Users.vue'
 import Billing from '../pages/Billing.vue'
 import Settings from '../pages/Settings.vue'
+import Analytics from '../pages/Analytics.vue'
 
 const routes = [
   {
@@ -25,6 +26,11 @@ const routes = [
     path: '/settings',
     name: 'settings',
     component: Settings,
+  },
+  {
+    path: '/analytics',
+    name: 'analytics',
+    component: Analytics,
   },
 ]
 

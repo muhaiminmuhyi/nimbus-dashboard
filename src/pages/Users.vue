@@ -4,7 +4,7 @@ import AppLayout from "../layouts/AppLayout.vue";
 import Button from "../components/ui/Button.vue";
 import Badge from "../components/ui/Badge.vue";
 import TableSkeleton from "../components/ui/TableSkeleton.vue";
-import { useUsers } from "../features/users/setUsers";
+import { useUsers } from "../features/users/useUsers";
 
 const {
   users,
