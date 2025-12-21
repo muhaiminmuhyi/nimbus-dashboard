@@ -9,11 +9,9 @@ import TableSkeleton from "../components/ui/TableSkeleton.vue";
 export type InvoiceStatus = "Paid" | "Pending" | "Overdue";
 
 const {
-  billings: invoices,
   loading,
   error,
   page,
-  pageSize,
   paginatedBillings,
   totalPages,
   fetchBillings,

@@ -11,7 +11,6 @@ const {
   loading,
   error,
   page,
-  pageSize,
   paginatedUsers,
   totalPages,
   fetchUsers,

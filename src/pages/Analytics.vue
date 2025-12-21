@@ -14,7 +14,6 @@ const {
   range,
   revenueSeries,
   userSeries,
-  analyticsRows,
   sortDirection,
   sortKey,
   columns,
