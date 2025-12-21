@@ -1,3 +1,10 @@
+<script setup lang="ts">
+import AppLayout from '../layouts/AppLayout.vue'
+import { usePermissions } from '../features/permissions/setPermissions'
+
+const { roles, modules, permissions } = usePermissions()
+</script>
+
 <template>
   <AppLayout title="Settings">
     <div class="space-y-6">
@@ -59,37 +66,3 @@
     </div>
   </AppLayout>
 </template>
-
-<script setup lang="ts">
-import { reactive } from 'vue'
-import AppLayout from '../layouts/AppLayout.vue'
-
-const roles = ['Admin', 'Manager', 'User'] as const
-
-const modules = [
-  { key: 'users', label: 'Users' },
-  { key: 'billing', label: 'Billing' },
-  { key: 'settings', label: 'Settings' },
-]
-
-type Role = typeof roles[number]
-type ModuleKey = typeof modules[number]['key']
-
-const permissions = reactive<Record<Role, Record<ModuleKey, boolean>>>({
-  Admin: {
-    users: true,
-    billing: true,
-    settings: true,
-  },
-  Manager: {
-    users: true,
-    billing: true,
-    settings: false,
-  },
-  User: {
-    users: false,
-    billing: true,
-    settings: false,
-  },
-})
-</script>
