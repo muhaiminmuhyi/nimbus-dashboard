@@ -68,7 +68,7 @@ onMounted(() => {
                 v-for="user in paginatedUsers"
                 :key="user.id"
                 v-memo="[user.id, user.active]"
-                class="border-t dark:border-t-slate-600 hover:bg-slate-50 dark:hover:bg-slate-800"
+                class="border-t dark:border-t-slate-600 border-t-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800"
               >
                 <td scope="row" class="px-6 py-3">{{ user.name }}</td>
                 <td class="px-6 py-3 text-slate-600 dark:text-slate-200">
@@ -101,7 +101,7 @@ onMounted(() => {
           </table>
         </div>
         <div
-          class="flex items-center justify-between px-6 py-4 border-t text-sm"
+          class="flex items-center justify-between px-6 py-4 border-t dark:border-t-slate-600 border-t-slate-200 text-sm"
         >
           <span> Page {{ page }} of {{ totalPages }} </span>
 

@@ -57,7 +57,7 @@ const { loading, kpis, actions, miniTrends, activities, weeklySummary } = useDas
         </div>
       </div>
 
-      <div class="h-px bg-slate-700/40 my-3" />
+      <div class="h-px dark:bg-slate-700/40 bg-slate-200 my-3" />
       
       <div class="space-y-3">
         <h3 class="text-sm font-semibold">Recent Activity</h3>

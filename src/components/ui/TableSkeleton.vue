@@ -31,7 +31,7 @@
           <tr
             v-for="n in rows"
             :key="n"
-            class="border-t dark:border-t-slate-600 hover:bg-slate-50 dark:hover:bg-slate-800 animate-pulse"
+            class="border-t dark:border-t-slate-600 hover:bg-slate-50 dark:hover:bg-slate-800 border-t-slate-200 animate-pulse"
           >
             <td class="px-6 py-3">
               <div class="h-4 w-1/2 bg-slate-200 rounded" />

@@ -5,7 +5,7 @@
       class="w-64 flex flex-col"
       :style="{ backgroundColor: 'rgb(var(--color-surface))' }"
     >
-      <div class="h-14 flex items-center px-6 font-bold border-b dark:border-b-slate-600">
+      <div class="h-14 flex items-center px-6 font-bold border-b dark:border-b-slate-600 border-b-slate-200">
         Nimbus
       </div>
 
@@ -21,7 +21,7 @@
     <!-- Main -->
     <div class="flex-1 flex flex-col">
       <header
-        class="h-14 border-b dark:border-b-slate-600 flex items-center justify-between px-6"
+        class="h-14 border-b dark:border-b-slate-600 border-b-slate-200 flex items-center justify-between px-6"
         :style="{ backgroundColor: 'rgb(var(--color-surface))' }"
       >
         <h1 class="font-semibold">{{ title }}</h1>
