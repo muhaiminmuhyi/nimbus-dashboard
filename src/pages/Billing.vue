@@ -74,7 +74,7 @@ const statusTone = (status: InvoiceStatus) => {
               aria-label="Billing row"
               v-for="invoice in paginatedBillings"
               :key="invoice.id"
-              class="border-t dark:border-t-slate-600 hover:bg-slate-50 dark:hover:bg-slate-800"
+              class="border-t dark:border-t-slate-600 border-t-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800"
             >
               <td scope="row" class="px-6 py-3 font-medium">
                 {{ invoice.number }}
@@ -98,7 +98,7 @@ const statusTone = (status: InvoiceStatus) => {
           </tbody>
         </table>
         <div
-          class="flex items-center justify-between px-6 py-4 border-t text-sm"
+          class="flex items-center justify-between px-6 py-4 border-t dark:border-t-slate-600 border-t-slate-200 text-sm"
           aria-label="Pagination"
         >
           <span> Page {{ page }} of {{ totalPages }} </span>

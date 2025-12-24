@@ -204,7 +204,7 @@ const formatNumber = (n: number) => new Intl.NumberFormat("id-ID").format(n);
                   <tr
                     v-for="row in virtualRows"
                     :key="row.id"
-                    class="border-t dark:border-t-slate-600 hover:bg-slate-50 dark:hover:bg-slate-700"
+                    class="border-t dark:border-t-slate-600 hover:bg-slate-50 border-t-slate-200 dark:hover:bg-slate-700"
                     :style="{ height: ROW_HEIGHT + 'px' }"
                   >
                     <td

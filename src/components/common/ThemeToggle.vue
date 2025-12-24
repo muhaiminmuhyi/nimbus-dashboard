@@ -1,6 +1,6 @@
 <template>
   <button
-    class="px-3 py-1.5 rounded-md text-sm border"
+    class="px-3 py-1.5 rounded-md text-sm border border-slate-200"
     @click="toggle"
     :aria-pressed="isDark"
     aria-label="Toggle dark mode"

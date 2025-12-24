@@ -1,7 +1,8 @@
 <template>
   <RouterLink
     :to="to"
-    :class="classes"
+    class="block px-3 py-2 rounded-lg text-sm font-medium transition"
+    :class="isActive ? activeClass : inactiveClass"
   >
     {{ label }}
   </RouterLink>
@@ -20,10 +21,9 @@ const route = useRoute()
 
 const isActive = computed(() => route.path === props.to)
 
-const classes = computed(() => [
-  'block px-3 py-2 rounded-lg text-sm transition',
-  isActive.value
-    ? 'bg-slate-800 text-white'
-    : 'text-slate-300 hover:bg-slate-800 hover:text-white',
-])
+const activeClass =
+  'bg-[rgb(var(--color-surface))] text-[rgb(var(--color-text))] shadow-sm'
+
+const inactiveClass =
+  'text-[rgb(var(--color-muted))] hover:text-[rgb(var(--color-text))] hover:bg-slate-100 dark:hover:bg-slate-700'
 </script>

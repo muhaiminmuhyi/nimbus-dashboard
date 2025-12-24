@@ -37,7 +37,7 @@ const { roles, modules, permissions } = usePermissions()
             <tr
               v-for="module in modules"
               :key="module.key"
-              class="border-t dark:border-t-slate-600"
+              class="border-t dark:border-t-slate-600 border-t-slate-200"
             >
               <td class="px-6 py-4 font-medium">
                 {{ module.label }}
