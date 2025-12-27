@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import { onMounted } from "vue";
-import AppLayout from "../layouts/AppLayout.vue";
-import Button from "../components/ui/Button.vue";
-import Badge from "../components/ui/Badge.vue";
-import TableSkeleton from "../components/ui/TableSkeleton.vue";
-import { useUsers } from "../features/users/useUsers";
+import AppLayout from "../../layouts/AppLayout.vue";
+import Button from "../../components/ui/Button.vue";
+import Badge from "../../components/ui/Badge.vue";
+import TableSkeleton from "../../components/ui/TableSkeleton.vue";
+import { useUsers } from "../../features/users/useUsers";
+import { useCan } from "../../features/authentication/useCan";
 
 const {
   users,
@@ -15,6 +16,8 @@ const {
   totalPages,
   fetchUsers,
 } = useUsers();
+
+const { can } = useCan();
 
 onMounted(() => {
   fetchUsers();
@@ -31,7 +34,13 @@ onMounted(() => {
             Manage access users and the role for users
           </p>
         </div>
-        <Button>Create Users</Button>
+        <Button :disabled="!can('users.create')">Create Users</Button>
+        <p
+          v-if="!can('users.create')"
+          class="text-xs text-slate-400 mt-1"
+        >
+          You don’t have permission to perform this action
+        </p>
       </div>
 
       <!-- Loading -->
@@ -81,8 +90,8 @@ onMounted(() => {
                   </Badge>
                 </td>
                 <td class="px-6 py-3 text-right space-x-2">
-                  <Button size="sm" variant="secondary">Edit</Button>
-                  <Button size="sm" variant="danger">Delete</Button>
+                  <Button size="sm" variant="secondary" v-if="can('users.update')">Edit</Button>
+                  <Button size="sm" variant="danger" v-if="can('users.delete')">Delete</Button>
                 </td>
               </tr>
               <tr v-if="users.length === 0">

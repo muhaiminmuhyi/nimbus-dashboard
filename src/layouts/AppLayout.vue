@@ -1,3 +1,19 @@
+<script setup lang="ts">
+import { computed } from 'vue';
+import NavItem from '../components/common/NavItem.vue'
+import ThemeToggle from '../components/common/ThemeToggle.vue'
+import { useAuthStore } from '../stores/auth';
+import { useCan } from '../features/authentication/useCan';
+
+const auth = useAuthStore();
+const { can } = useCan();
+
+const menus = computed(() => {
+  return auth.menus.filter((m) => can(m.permission));
+})
+
+defineProps<{ title: string }>()
+</script>
 <template>
   <div class="min-h-screen flex">
     <!-- Sidebar -->
@@ -9,12 +25,22 @@
         Nimbus
       </div>
 
+
       <nav class="flex-1 px-3 py-4 space-y-1">
-        <NavItem label="Dashboard" to="/" />
-        <NavItem label="Users" to="/users" />
-        <NavItem label="Billing" to="/billing" />
-        <NavItem label="Analytics" to="/analytics" />
-        <NavItem label="Settings" to="/settings" />
+        <template v-if="menus.length > 0">
+          <NavItem 
+            v-for="menu in menus"
+            :key="menu.route"
+            :label="menu.label"
+            :to="menu.route"
+          />
+        </template>
+        <div
+          v-else
+          class="px-3 py-2 text-sm text-slate-400 italic"
+        >
+          No accessible menu
+        </div>
       </nav>
     </aside>
 
@@ -38,10 +64,3 @@
     </div>
   </div>
 </template>
-
-<script setup lang="ts">
-import NavItem from '../components/common/NavItem.vue'
-import ThemeToggle from '../components/common/ThemeToggle.vue'
-
-defineProps<{ title: string }>()
-</script>

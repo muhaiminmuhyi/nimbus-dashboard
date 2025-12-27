@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import AppLayout from "../layouts/AppLayout.vue";
-import KpiCard from "../components/dashboard/KpiCard.vue";
-import { useDashboard } from "../features/dashboard/useDashboard";
-import ActionItem from "../components/dashboard/ActionItem.vue";
-import ActivityItem from "../components/dashboard/ActivityItem.vue";
-import WeeklySummary from "../components/dashboard/WeeklySummary.vue";
+import AppLayout from "../../layouts/AppLayout.vue";
+import KpiCard from "../../components/dashboard/KpiCard.vue";
+import { useDashboard } from "../../features/dashboard/useDashboard";
+import ActionItem from "../../components/dashboard/ActionItem.vue";
+import ActivityItem from "../../components/dashboard/ActivityItem.vue";
+import WeeklySummary from "../../components/dashboard/WeeklySummary.vue";
 
 const { loading, kpis, actions, miniTrends, activities, weeklySummary } = useDashboard();
 </script>

@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { onMounted } from "vue";
-import AppLayout from "../layouts/AppLayout.vue";
-import { useAnalytics } from "../features/analytics/useAnalytics";
-import Button from "../components/ui/Button.vue";
-import BarChart from "../components/charts/BarChart.vue";
-import LineChart from "../components/charts/LineChart.vue";
-import TableSkeleton from "../components/ui/TableSkeleton.vue";
+import AppLayout from "../../layouts/AppLayout.vue";
+import { useAnalytics } from "../../features/analytics/useAnalytics";
+import Button from "../../components/ui/Button.vue";
+import BarChart from "../../components/charts/BarChart.vue";
+import LineChart from "../../components/charts/LineChart.vue";
+import TableSkeleton from "../../components/ui/TableSkeleton.vue";
 
 const {
   loading,

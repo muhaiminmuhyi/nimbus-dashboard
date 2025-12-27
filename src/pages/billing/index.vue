@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import AppLayout from "../layouts/AppLayout.vue";
-import Button from "../components/ui/Button.vue";
-import Badge from "../components/ui/Badge.vue";
-import { useBilling } from "../features/billing/useBillings";
+import AppLayout from "../../layouts/AppLayout.vue";
+import Button from "../../components/ui/Button.vue";
+import Badge from "../../components/ui/Badge.vue";
+import { useBilling } from "../../features/billing/useBillings";
 import { onMounted } from "vue";
-import TableSkeleton from "../components/ui/TableSkeleton.vue";
+import TableSkeleton from "../../components/ui/TableSkeleton.vue";
 
 export type InvoiceStatus = "Paid" | "Pending" | "Overdue";
 
