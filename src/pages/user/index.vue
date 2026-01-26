@@ -1,21 +1,19 @@
 <script setup lang="ts">
 import { onMounted } from "vue";
+import { storeToRefs } from "pinia";
 import AppLayout from "../../layouts/AppLayout.vue";
 import Button from "../../components/ui/Button.vue";
 import Badge from "../../components/ui/Badge.vue";
 import TableSkeleton from "../../components/ui/TableSkeleton.vue";
-import { useUsers } from "../../features/users/useUsers";
 import { useCan } from "../../features/authentication/useCan";
+import { useUsersStore } from "../../stores/users";
+import { format } from "../../util/format";
 
-const {
-  users,
-  loading,
-  error,
-  page,
-  paginatedUsers,
-  totalPages,
-  fetchUsers,
-} = useUsers();
+const { ucWords } = format();
+
+const store = useUsersStore();
+const { users, loading, error, page, totalPages } = storeToRefs(store);
+const { fetchUsers } = store;
 
 const { can } = useCan();
 
@@ -34,7 +32,7 @@ onMounted(() => {
             Manage access users and the role for users
           </p>
         </div>
-        <Button :disabled="!can('users.create')">Create Users</Button>
+        <Button :disabled="!can('users.create')" @click="$router.push('users/create')">Create Users</Button>
         <p
           v-if="!can('users.create')"
           class="text-xs text-slate-400 mt-1"
@@ -74,7 +72,7 @@ onMounted(() => {
               <tr
                 tabindex="0"
                 aria-label="User row"
-                v-for="user in paginatedUsers"
+                v-for="user in users"
                 :key="user.id"
                 v-memo="[user.id, user.active]"
                 class="border-t dark:border-t-slate-600 border-t-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800"
@@ -83,10 +81,10 @@ onMounted(() => {
                 <td class="px-6 py-3 text-slate-600 dark:text-slate-200">
                   {{ user.email }}
                 </td>
-                <td class="px-6 py-3">{{ user.role }}</td>
+                <td class="px-6 py-3">{{ ucWords(user.roles[0]?.name || "") }}</td>
                 <td class="px-6 py-3">
-                  <Badge :tone="user.active ? 'success' : 'error'">
-                    {{ user.active ? "Active" : "Disabled" }}
+                  <Badge :tone="user.status == 'active' ? 'success' : 'error'">
+                    {{ ucWords(user.status) }}
                   </Badge>
                 </td>
                 <td class="px-6 py-3 text-right space-x-2">

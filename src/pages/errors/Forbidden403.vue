@@ -1,7 +1,20 @@
 <script setup lang="ts">
+import { onMounted, ref } from "vue";
 import { useRouter } from "vue-router";
-
 const router = useRouter();
+const isDark = ref(false);
+
+const applyTheme = (dark: boolean) => {
+  const html = document.documentElement
+  html.classList.toggle('dark', dark)
+  localStorage.setItem('theme', dark ? 'dark' : 'light')
+}
+
+onMounted(() => {
+  const saved = localStorage.getItem('theme')
+  isDark.value = saved === 'dark'
+  applyTheme(isDark.value)
+})
 </script>
 
 <template>

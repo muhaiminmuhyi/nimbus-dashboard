@@ -1,8 +1,6 @@
 import { defineStore } from "pinia";
 import http from "../lib/http";
-import router from "../router";
-import { setTokens, clearTokens } from "../lib/token";
-import { registerDynamicRoutes } from "../router/dynamic";
+import { setTokens, clearTokens, getAccessToken } from "../lib/token";
 
 export const useAuthStore = defineStore("auth", {
   state: () => ({
@@ -10,23 +8,33 @@ export const useAuthStore = defineStore("auth", {
     permissions: [] as string[],
     menus: [] as any[],
     ready: false,
+    accessToken: getAccessToken(),
   }),
 
   actions: {
     async login(email: string, password: string) {
       const res = await http.post("/auth/login", { email, password });
-      setTokens(res.data.access_token, res.data.refresh_token);
+      this.accessToken = res.data.data.access_token;
+      await setTokens(res.data.data.access_token, res.data.data.refresh_token);
     },
 
     async bootstrap() {
-      const res = await http.get("/me");
-      this.user = res.data.user;
-      this.permissions = res.data.permissions;
-      this.menus = res.data.menus;
-
-      registerDynamicRoutes(router, this.menus);
-
-      this.ready = true;
+      try {
+        const res = await http.get("/auth/me");
+        this.user = res.data.data.user;
+        this.permissions = res.data.data.permissions;
+        this.menus = res.data.data.menus;
+        // Cache menus in localStorage
+        localStorage.setItem('menus', JSON.stringify(this.menus));
+      } catch (error) {
+        // On error, try to load from cache
+        const cachedMenus = localStorage.getItem('menus');
+        if (cachedMenus) {
+          this.menus = JSON.parse(cachedMenus);
+        }
+      } finally {
+        this.ready = true;
+      }
     },
 
     logout() {
@@ -35,4 +43,14 @@ export const useAuthStore = defineStore("auth", {
       window.location.href = "/login";
     },
   },
+
+  getters: {
+    isAuthenticated: (state) => !!state.accessToken,
+    hasPermission: (state) => {
+      return (permission?: string) => {
+        if (!permission) return true; // route tanpa permission → allowed
+        return state.permissions.includes(permission);
+      };
+    },
+  }
 });

@@ -46,10 +46,10 @@ http.interceptors.response.use(
           refresh_token: getRefreshToken(),
         });
 
-        setTokens(res.data.access_token, res.data.refresh_token);
-        processQueue(res.data.access_token);
+        setTokens(res.data.data.access_token, res.data.data.refresh_token);
+        processQueue(res.data.data.access_token);
 
-        original.headers.Authorization = `Bearer ${res.data.access_token}`;
+        original.headers.Authorization = `Bearer ${res.data.data.access_token}`;
         return http(original);
       } catch {
         clearTokens();

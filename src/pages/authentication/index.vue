@@ -1,8 +1,7 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import { useAuthStore } from "../../stores/auth";
-
 const auth = useAuthStore();
 const router = useRouter();
 const route = useRoute();
@@ -11,6 +10,19 @@ const email = ref("");
 const password = ref("");
 const loading = ref(false);
 const error = ref("");
+const isDark = ref(false);
+
+const applyTheme = (dark: boolean) => {
+  const html = document.documentElement
+  html.classList.toggle('dark', dark)
+  localStorage.setItem('theme', dark ? 'dark' : 'light')
+}
+
+onMounted(() => {
+  const saved = localStorage.getItem('theme')
+  isDark.value = saved === 'dark'
+  applyTheme(isDark.value)
+})
 
 const submit = async () => {
   error.value = "";

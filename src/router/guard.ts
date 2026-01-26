@@ -1,25 +1,28 @@
 import { useAuthStore } from "../stores/auth";
 
-export async function authGuard(to, from, next) {
+export function authGuard(to: any) {
   const auth = useAuthStore();
 
-  if (to.meta.public) return next();
+  // ⏳ tunggu bootstrap
+  if (auth.accessToken && !auth.ready) {
+    return true;
+  }
 
-  try {
-    if (!auth.ready) {
-      await auth.bootstrap();
-    }
-  } catch {
-    return next({
+  if (to.meta.requiresAuth && !auth.isAuthenticated) {
+    return {
       path: "/login",
       query: { redirect: to.fullPath },
-    });
-  }
-  
-  if (to.meta.permission && !auth.permissions.includes(to.meta.permission)) {
-    return next("/403");
+    };
   }
 
-  return next();
+  if (to.meta.permission && !auth.hasPermission(to.meta.permission)) {
+    return "/403";
+  }
+
+  if (to.meta.guestOnly && auth.isAuthenticated) {
+    return "/";
+  }
+
+  return true;
 }
 
