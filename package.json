@@ -11,12 +11,14 @@
     "lint:check": "eslint ."
   },
   "dependencies": {
+    "@headlessui/vue": "^1.7.23",
     "@tailwindcss/vite": "^4.1.18",
     "axios": "^1.13.2",
     "pinia": "^3.0.4",
     "tailwindcss": "^4.1.18",
     "vue": "^3.5.24",
-    "vue-router": "^4.6.4"
+    "vue-router": "^4.6.4",
+    "vue-sonner": "^2.0.9"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.2",

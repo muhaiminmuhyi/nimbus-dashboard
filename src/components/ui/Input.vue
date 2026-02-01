@@ -11,7 +11,9 @@
       :value="modelValue"
       :placeholder="placeholder"
       class="w-full rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 px-3 py-2 text-slate-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
-      @input="$emit('update:modelValue', ($event.target as HTMLInputElement).value)"
+      @input="handleInput"
+      @focus="handleFocus"
+      @blur="handleBlur"
     >
     <div
       v-if="error"
@@ -29,11 +31,34 @@ interface Props {
   label?: string;
   placeholder?: string;
   error?: string;
+  onInput?: () => void;
 }
 
-defineProps<Props>();
+const props = defineProps<Props>();
 
-defineEmits<{
+const emit = defineEmits<{
   'update:modelValue': [value: string];
+  'input': [event: Event];
+  'focus': [event: FocusEvent];
+  'blur': [event: FocusEvent];
 }>();
+
+const handleInput = (event: Event) => {
+  const target = event.target as HTMLInputElement;
+  emit('update:modelValue', target.value);
+  emit('input', event);
+  
+  // Call the validation function if provided
+  if (props.onInput) {
+    props.onInput();
+  }
+};
+
+const handleFocus = (event: FocusEvent) => {
+  emit('focus', event);
+};
+
+const handleBlur = (event: FocusEvent) => {
+  emit('blur', event);
+};
 </script>

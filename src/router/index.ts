@@ -20,10 +20,10 @@ const routes = [
     meta: { public: true },
   },
   {
-  path: "/403",
-  component: () => import("../pages/errors/Forbidden403.vue"),
-  meta: { public: true },
-}
+    path: "/403",
+    component: () => import("../pages/errors/Forbidden403.vue"),
+    meta: { public: true },
+  },
 ]
 
 const router = createRouter({
