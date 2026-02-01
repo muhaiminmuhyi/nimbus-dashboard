@@ -1,14 +1,15 @@
 export interface User {
-  id: number;
+  id: string;
   name: string;
   email: string;
-  role: string;
+  roles: { id: string; name: string }[];
+  status: 'active' | 'inactive' | 'pending';
   createdAt: string;
   updatedAt: string;
 }
 
 export interface Menu {
-  id: number;
+  id: string;
   name: string;
   path: string;
   icon?: string;
@@ -16,7 +17,7 @@ export interface Menu {
 }
 
 export interface Permission {
-  id: number;
+  id: string;
   name: string;
   description?: string;
 }

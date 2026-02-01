@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { onMounted, ref } from "vue";
+import { onMounted, ref, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { useAuthStore } from "../../stores/auth";
+import { toast } from "vue-sonner";
 const auth = useAuthStore();
 const router = useRouter();
 const route = useRoute();
@@ -24,12 +25,20 @@ onMounted(() => {
   applyTheme(isDark.value)
 })
 
+watch(error, (newError) => {
+  if (newError) {
+    toast.error(newError);
+  }
+});
+
 const submit = async () => {
   error.value = "";
   loading.value = true;
 
   try {
     await auth.login({ email: email.value, password: password.value });
+
+    await auth.bootstrap();
     router.push((route.query.redirect as string) || "/");
   } catch (e: any) {
     error.value =
@@ -51,14 +60,6 @@ const submit = async () => {
         <p class="text-sm text-slate-500 dark:text-slate-400">
           Sign in to your dashboard
         </p>
-      </div>
-
-      <!-- Error -->
-      <div
-        v-if="error"
-        class="mb-4 rounded-md bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 px-3 py-2 text-sm"
-      >
-        {{ error }}
       </div>
 
       <!-- Form -->

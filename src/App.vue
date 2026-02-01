@@ -6,8 +6,8 @@ import { Toaster } from 'vue-sonner';
 <template>
   <Toaster
     position="top-right"
-    richColors
-    closeButton
+    rich-colors
+    close-button
   />
   <RouterView />
 </template>

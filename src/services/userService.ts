@@ -1,6 +1,6 @@
 import http from '../lib/http';
 import type { User } from '../types/user';
-import type { CreateUserRequest, StoreUserData } from '../types/createUser';
+import type { StoreUserData } from '../types/createUser';
 
 export interface FetchUsersResponse {
   data: {
@@ -40,5 +40,9 @@ export const userService = {
   async searchRoles(keyword: string): Promise<SearchRolesResponse> {
     const res = await http.get('/auth/users/components/search-roles', { params: { keyword } });
     return res.data;
+  },
+
+  async deleteUser(userId: string): Promise<void> {
+    await http.delete(`/auth/users?user_id=${userId}`);
   },
 };

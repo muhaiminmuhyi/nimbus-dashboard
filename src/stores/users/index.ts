@@ -27,5 +27,12 @@ export const useUsersStore = defineStore("users", {
         this.loading = false;
       }
     },
+
+    async deleteUser(userId: string) {
+      await userService.deleteUser(userId);
+      // Remove user from local state
+      this.users = this.users.filter(user => user.id !== userId);
+      return { success: true };
+    },
   },
 });
