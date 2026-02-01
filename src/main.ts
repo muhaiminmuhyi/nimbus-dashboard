@@ -6,11 +6,15 @@ import { createPinia } from 'pinia'
 import "./lib/interceptor"
 import { useAuthStore } from './stores/auth'
 import { registerDynamicRoutes } from './router/dynamic'
+import { setupGlobalErrorHandler } from './lib/errorHandler'
 
 const app = createApp(App);
 const pinia = createPinia();
 
 app.use(pinia);
+
+// Setup global error handling
+setupGlobalErrorHandler(app);
 
 // Load cached menus and register routes before app.use(router)
 const cachedMenus = localStorage.getItem('menus');
@@ -20,8 +24,6 @@ if (cachedMenus) {
 }
 
 app.use(router);
-
-let dynamicRoutesReady = false;
 
 async function bootstrap() {
   const auth = useAuthStore();
@@ -34,13 +36,11 @@ async function bootstrap() {
       // For simplicity, re-register (Vue Router handles duplicates)
       registerDynamicRoutes(router, freshMenus);
     }
-    dynamicRoutesReady = true;
 
     const resolved = router.resolve(router.currentRoute.value.fullPath);
     if (resolved.matched.length > 0) {
       await router.replace(router.currentRoute.value.fullPath);
     } else {
-      console.warn('Route not found on reload, redirecting to dashboard');
       await router.replace('/');
     }
   }

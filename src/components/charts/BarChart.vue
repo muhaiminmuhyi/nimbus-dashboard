@@ -19,14 +19,20 @@ const barWidth = computed(
 </script>
 
 <template>
-  <svg :width="width" :height="height">
-    <g v-for="(d, i) in data" :key="i">
+  <svg
+    :width="width"
+    :height="height"
+  >
+    <g
+      v-for="(d, i) in data"
+      :key="i"
+    >
       <rect
         :x="padding + i * barWidth"
         :y="
           height -
-          padding -
-          (d.value / max) * (height - padding * 2)
+            padding -
+            (d.value / max) * (height - padding * 2)
         "
         :width="barWidth - 6"
         :height="

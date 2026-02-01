@@ -1,32 +1,33 @@
 import { defineStore } from "pinia";
-import http from "../lib/http";
-import { setTokens, clearTokens, getAccessToken } from "../lib/token";
+import { clearTokens, getAccessToken, setTokens } from "../../lib/token";
+import { authService } from "../../services/authService";
+import type { AuthState, BootstrapResponse, LoginRequest } from "../../types/auth";
 
 export const useAuthStore = defineStore("auth", {
-  state: () => ({
-    user: null as any,
-    permissions: [] as string[],
-    menus: [] as any[],
+  state: (): AuthState => ({
+    user: null,
+    permissions: [],
+    menus: [],
     ready: false,
     accessToken: getAccessToken(),
   }),
 
   actions: {
-    async login(email: string, password: string) {
-      const res = await http.post("/auth/login", { email, password });
-      this.accessToken = res.data.data.access_token;
-      await setTokens(res.data.data.access_token, res.data.data.refresh_token);
+    async login(data: LoginRequest) {
+      const response = await authService.login(data);
+      this.accessToken = response.access_token;
+      await setTokens(response.access_token, response.refresh_token);
     },
 
     async bootstrap() {
       try {
-        const res = await http.get("/auth/me");
-        this.user = res.data.data.user;
-        this.permissions = res.data.data.permissions;
-        this.menus = res.data.data.menus;
+        const response: BootstrapResponse = await authService.bootstrap();
+        this.user = response.data.user;
+        this.permissions = response.data.permissions;
+        this.menus = response.data.menus;
         // Cache menus in localStorage
         localStorage.setItem('menus', JSON.stringify(this.menus));
-      } catch (error) {
+      } catch {
         // On error, try to load from cache
         const cachedMenus = localStorage.getItem('menus');
         if (cachedMenus) {

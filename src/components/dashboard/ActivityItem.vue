@@ -2,7 +2,7 @@
 import { useRouter } from "vue-router";
 import RelativeTime from "../ui/RelativeTime.vue";
 
-const props = defineProps<{
+const _props = defineProps<{
   message: string;
   time: number;
   link?: string;
@@ -15,15 +15,17 @@ const router = useRouter();
 <template>
   <div
     class="flex items-start gap-3 p-3 rounded-lg cursor-pointer transition-all duration-150 hover:bg-slate-50 dark:hover:bg-slate-800"
-    :class="highlight && 'animate-flash'"
-    @click="link && router.push(link)"
+    :class="_props.highlight && 'animate-flash'"
+    @click="_props.link && router.push(_props.link)"
   >
     <!-- dot -->
     <div class="mt-1 h-2 w-2 rounded-full bg-slate-400" />
 
     <div class="flex-1">
-      <p class="text-sm">{{ message }}</p>
-      <RelativeTime :time="time" />
+      <p class="text-sm">
+        {{ _props.message }}
+      </p>
+      <RelativeTime :time="_props.time" />
     </div>
   </div>
 </template>

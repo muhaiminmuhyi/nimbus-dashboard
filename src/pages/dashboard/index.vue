@@ -12,24 +12,37 @@ const { loading, kpis, actions, miniTrends, activities, weeklySummary } = useDas
 <template>
   <AppLayout title="Dashboard">
     <div class="space-y-6">
-      <h2 class="text-lg font-semibold">Overview</h2>
+      <h2 class="text-lg font-semibold">
+        Overview
+      </h2>
 
       <!-- Loading -->
-      <div v-if="loading" class="grid grid-cols-4 gap-4 animate-pulse">
-        <div v-for="n in 4" :key="n" class="h-24 rounded-xl bg-slate-200" />
+      <div
+        v-if="loading"
+        class="grid grid-cols-4 gap-4 animate-pulse"
+      >
+        <div
+          v-for="n in 4"
+          :key="n"
+          class="h-24 rounded-xl bg-slate-200"
+        />
       </div>
 
       <!-- KPI -->
-      <div v-else class="grid grid-cols-4 gap-4">
+      <div
+        v-else
+        class="grid grid-cols-4 gap-4"
+      >
         <KpiCard
           v-for="kpi in kpis"
+          :key="kpi.key"
           v-bind="kpi"
           :sparkline="
             kpi.key === 'revenue'
               ? miniTrends.revenue7d
               : kpi.key === 'users'
-              ? miniTrends.users7d
-              : undefined
+                ? miniTrends.users7d
+                : undefined
           "
         />
       </div>
@@ -37,9 +50,14 @@ const { loading, kpis, actions, miniTrends, activities, weeklySummary } = useDas
       <div class="grid grid-cols-3 gap-6">
         <!-- Action Required -->
         <div class="col-span-1 space-y-3 animate-fade-in">
-          <h3 class="text-sm font-semibold">Action Required</h3>
+          <h3 class="text-sm font-semibold">
+            Action Required
+          </h3>
 
-          <div v-if="actions.length === 0" class="text-sm text-slate-500">
+          <div
+            v-if="actions.length === 0"
+            class="text-sm text-slate-500"
+          >
             No actions required 🎉
           </div>
 
@@ -52,7 +70,9 @@ const { loading, kpis, actions, miniTrends, activities, weeklySummary } = useDas
 
         <!-- Weekly Summary (ISI AREA KOSONG) -->
         <div class="col-span-2">
-          <h3 class="text-sm font-semibold mt-3">&nbsp;</h3>
+          <h3 class="text-sm font-semibold mt-3">
+&nbsp;
+          </h3>
           <WeeklySummary :items="weeklySummary" />
         </div>
       </div>
@@ -60,9 +80,14 @@ const { loading, kpis, actions, miniTrends, activities, weeklySummary } = useDas
       <div class="h-px dark:bg-slate-700/40 bg-slate-200 my-3" />
       
       <div class="space-y-3">
-        <h3 class="text-sm font-semibold">Recent Activity</h3>
+        <h3 class="text-sm font-semibold">
+          Recent Activity
+        </h3>
 
-        <div v-if="activities.length === 0" class="text-sm text-slate-500">
+        <div
+          v-if="activities.length === 0"
+          class="text-sm text-slate-500"
+        >
           No recent activity
         </div>
 

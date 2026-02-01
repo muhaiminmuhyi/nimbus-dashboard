@@ -31,7 +31,10 @@ const points = computed(() =>
 </script>
 
 <template>
-  <svg :width="width" :height="height">
+  <svg
+    :width="width"
+    :height="height"
+  >
     <polyline
       :points="points"
       fill="none"

@@ -1,10 +1,11 @@
 import http from "./http";
 import {
+  clearTokens,
   getAccessToken,
   getRefreshToken,
   setTokens,
-  clearTokens,
 } from "./token";
+import { authService } from "../services/authService";
 
 let isRefreshing = false;
 let queue: any[] = [];
@@ -42,14 +43,12 @@ http.interceptors.response.use(
       isRefreshing = true;
 
       try {
-        const res = await http.post("/auth/refresh", {
-          refresh_token: getRefreshToken(),
-        });
+        const response = await authService.refreshToken(getRefreshToken()!);
 
-        setTokens(res.data.data.access_token, res.data.data.refresh_token);
-        processQueue(res.data.data.access_token);
+        setTokens(response.access_token, response.refresh_token);
+        processQueue(response.access_token);
 
-        original.headers.Authorization = `Bearer ${res.data.data.access_token}`;
+        original.headers.Authorization = `Bearer ${response.access_token}`;
         return http(original);
       } catch {
         clearTokens();

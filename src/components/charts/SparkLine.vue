@@ -36,7 +36,11 @@ onMounted(() => (draw.value = true))
 </script>
 
 <template>
-  <svg :width="width" :height="height" class="text-slate-400">
+  <svg
+    :width="width"
+    :height="height"
+    class="text-slate-400"
+  >
     <polyline
       :points="points"
       fill="none"

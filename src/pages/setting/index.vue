@@ -9,8 +9,13 @@ const { roles, modules, permissions } = usePermissions()
   <AppLayout title="Settings">
     <div class="space-y-6">
       <div>
-        <h2 class="text-lg font-semibold">Permissions</h2>
-        <p class="text-sm" :style="{ color: 'rgb(var(--color-muted))' }">
+        <h2 class="text-lg font-semibold">
+          Permissions
+        </h2>
+        <p
+          class="text-sm"
+          :style="{ color: 'rgb(var(--color-muted))' }"
+        >
           Manage role-based access control
         </p>
       </div>
@@ -22,7 +27,9 @@ const { roles, modules, permissions } = usePermissions()
         <table class="w-full text-sm">
           <thead class="bg-slate-50 dark:bg-slate-700">
             <tr>
-              <th class="px-6 py-3 text-left">Module</th>
+              <th class="px-6 py-3 text-left">
+                Module
+              </th>
               <th
                 v-for="role in roles"
                 :key="role"
@@ -49,10 +56,10 @@ const { roles, modules, permissions } = usePermissions()
                 class="px-6 py-4 text-center"
               >
                 <input
-                  type="checkbox"
                   v-model="permissions[role][module.key]"
+                  type="checkbox"
                   class="h-4 w-4"
-                />
+                >
               </td>
             </tr>
           </tbody>

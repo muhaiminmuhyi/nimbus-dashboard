@@ -27,13 +27,20 @@ const getItem = (label: string) => props.items.find((i) => i.label === label);
     class="rounded-xl px-4 pt-3 pb-4 space-y-4"
     :style="{ backgroundColor: 'rgb(var(--color-surface))' }"
   >
-    <h3 class="text-sm font-semibold">This Week Summary</h3>
+    <h3 class="text-sm font-semibold">
+      This Week Summary
+    </h3>
 
     <!-- TOP GRID: Revenue + Active Users -->
     <div class="grid grid-cols-2 gap-4">
       <!-- Revenue -->
-      <div v-if="getItem('Revenue')" class="space-y-1">
-        <p class="text-xs text-slate-500">Revenue</p>
+      <div
+        v-if="getItem('Revenue')"
+        class="space-y-1"
+      >
+        <p class="text-xs text-slate-500">
+          Revenue
+        </p>
         <p
           class="text-sm font-medium"
           :class="trendColor(getItem('Revenue')?.trend)"
@@ -50,8 +57,13 @@ const getItem = (label: string) => props.items.find((i) => i.label === label);
       </div>
 
       <!-- Active Users -->
-      <div v-if="getItem('Active Users')" class="space-y-1">
-        <p class="text-xs text-slate-500">Active Users</p>
+      <div
+        v-if="getItem('Active Users')"
+        class="space-y-1"
+      >
+        <p class="text-xs text-slate-500">
+          Active Users
+        </p>
         <p
           class="text-sm font-medium"
           :class="trendColor(getItem('Active Users')?.trend)"
@@ -69,8 +81,13 @@ const getItem = (label: string) => props.items.find((i) => i.label === label);
     </div>
 
     <!-- BOTTOM: Invoices (FULL WIDTH) -->
-    <div v-if="getItem('Invoices')" class="space-y-1">
-      <p class="text-xs text-slate-500">Invoices</p>
+    <div
+      v-if="getItem('Invoices')"
+      class="space-y-1"
+    >
+      <p class="text-xs text-slate-500">
+        Invoices
+      </p>
       <p
         class="text-sm font-medium"
         :class="trendColor(getItem('Invoices')?.trend)"

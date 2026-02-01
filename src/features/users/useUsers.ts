@@ -40,7 +40,7 @@ export function useUsers() {
         role: i % 2 === 0 ? 'Admin' : 'User',
         active: i % 3 !== 0,
       }))
-    } catch (e) {
+    } catch {
       error.value = 'Failed to load users'
     } finally {
       loading.value = false

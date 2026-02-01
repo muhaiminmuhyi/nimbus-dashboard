@@ -25,7 +25,6 @@ function addRoutesRecursively(router: Router, menus: any[]) {
         
         const childPath = menu.route + "/" + child.route.replace("/", "");
         const childName = child.route.replaceAll("/", "_");
-        console.log(childComponent, childPath, childName, child.route);
 
         router.addRoute({
           path: childPath,

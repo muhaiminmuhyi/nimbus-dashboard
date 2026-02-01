@@ -40,7 +40,7 @@ export function useBilling() {
         amount: `$${(Math.random() * 5000 + 100).toFixed(2)}`,
         status: i % 3 === 0 ? "Paid" : i % 3 === 1 ? "Pending" : "Overdue",
       }));
-    } catch (e) {
+    } catch {
       error.value = "Failed to load billings";
     } finally {
       loading.value = false;

@@ -20,7 +20,9 @@ onMounted(() => {
 <template>
   <div class="min-h-screen flex items-center justify-center bg-slate-100 dark:bg-slate-900">
     <div class="text-center max-w-md px-6">
-      <h1 class="text-6xl font-bold text-slate-800 dark:text-white">403</h1>
+      <h1 class="text-6xl font-bold text-slate-800 dark:text-white">
+        403
+      </h1>
 
       <p class="mt-4 text-lg font-medium text-slate-700 dark:text-slate-300">
         Access Denied

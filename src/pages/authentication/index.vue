@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
-import { useRouter, useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import { useAuthStore } from "../../stores/auth";
 const auth = useAuthStore();
 const router = useRouter();
@@ -29,7 +29,7 @@ const submit = async () => {
   loading.value = true;
 
   try {
-    await auth.login(email.value, password.value);
+    await auth.login({ email: email.value, password: password.value });
     router.push((route.query.redirect as string) || "/");
   } catch (e: any) {
     error.value =
@@ -62,7 +62,10 @@ const submit = async () => {
       </div>
 
       <!-- Form -->
-      <form @submit.prevent="submit" class="space-y-4">
+      <form
+        class="space-y-4"
+        @submit.prevent="submit"
+      >
         <div>
           <label class="block text-sm text-slate-600 dark:text-slate-400 mb-1">
             Email
@@ -73,7 +76,7 @@ const submit = async () => {
             placeholder="admin@nimbus.dev"
             required
             class="w-full rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 px-3 py-2 text-slate-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
-          />
+          >
         </div>
 
         <div>
@@ -86,7 +89,7 @@ const submit = async () => {
             placeholder="••••••••"
             required
             class="w-full rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 px-3 py-2 text-slate-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
-          />
+          >
         </div>
 
         <button

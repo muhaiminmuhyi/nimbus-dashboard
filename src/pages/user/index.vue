@@ -27,12 +27,22 @@ onMounted(() => {
       <!-- Header -->
       <div class="flex items-center justify-between">
         <div>
-          <h2 class="text-lg font-semibold">Users</h2>
-          <p class="text-sm" :style="{ color: 'rgb(var(--color-muted))' }">
+          <h2 class="text-lg font-semibold">
+            Users
+          </h2>
+          <p
+            class="text-sm"
+            :style="{ color: 'rgb(var(--color-muted))' }"
+          >
             Manage access users and the role for users
           </p>
         </div>
-        <Button :disabled="!can('users.create')" @click="$router.push('users/create')">Create Users</Button>
+        <Button
+          :disabled="!can('users.create')"
+          @click="$router.push('users/create')"
+        >
+          Create Users
+        </Button>
         <p
           v-if="!can('users.create')"
           class="text-xs text-slate-400 mt-1"
@@ -45,7 +55,10 @@ onMounted(() => {
       <TableSkeleton v-if="loading" />
 
       <!-- Error -->
-      <div v-else-if="error" class="p-10 text-center text-red-600">
+      <div
+        v-else-if="error"
+        class="p-10 text-center text-red-600"
+      >
         {{ error }}
       </div>
 
@@ -60,36 +73,68 @@ onMounted(() => {
           <table class="w-full text-sm">
             <thead class="bg-slate-50 dark:bg-slate-700">
               <tr>
-                <th scope="col" class="px-6 py-3 text-left">Name</th>
-                <th class="px-6 py-3 text-left">Email</th>
-                <th class="px-6 py-3 text-left">Role</th>
-                <th class="px-6 py-3 text-left">Status</th>
-                <th class="px-6 py-3 text-right">Action</th>
+                <th
+                  scope="col"
+                  class="px-6 py-3 text-left"
+                >
+                  Name
+                </th>
+                <th class="px-6 py-3 text-left">
+                  Email
+                </th>
+                <th class="px-6 py-3 text-left">
+                  Role
+                </th>
+                <th class="px-6 py-3 text-left">
+                  Status
+                </th>
+                <th class="px-6 py-3 text-right">
+                  Action
+                </th>
               </tr>
             </thead>
 
             <tbody>
               <tr
-                tabindex="0"
-                aria-label="User row"
                 v-for="user in users"
                 :key="user.id"
                 v-memo="[user.id, user.active]"
+                tabindex="0"
+                aria-label="User row"
                 class="border-t dark:border-t-slate-600 border-t-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800"
               >
-                <td scope="row" class="px-6 py-3">{{ user.name }}</td>
+                <td
+                  scope="row"
+                  class="px-6 py-3"
+                >
+                  {{ user.name }}
+                </td>
                 <td class="px-6 py-3 text-slate-600 dark:text-slate-200">
                   {{ user.email }}
                 </td>
-                <td class="px-6 py-3">{{ ucWords(user.roles[0]?.name || "") }}</td>
+                <td class="px-6 py-3">
+                  {{ ucWords(user.roles[0]?.name || "") }}
+                </td>
                 <td class="px-6 py-3">
                   <Badge :tone="user.status == 'active' ? 'success' : 'error'">
                     {{ ucWords(user.status) }}
                   </Badge>
                 </td>
                 <td class="px-6 py-3 text-right space-x-2">
-                  <Button size="sm" variant="secondary" v-if="can('users.update')">Edit</Button>
-                  <Button size="sm" variant="danger" v-if="can('users.delete')">Delete</Button>
+                  <Button
+                    v-if="can('users.update')"
+                    size="sm"
+                    variant="secondary"
+                  >
+                    Edit
+                  </Button>
+                  <Button
+                    v-if="can('users.delete')"
+                    size="sm"
+                    variant="danger"
+                  >
+                    Delete
+                  </Button>
                 </td>
               </tr>
               <tr v-if="users.length === 0">
@@ -117,8 +162,8 @@ onMounted(() => {
               size="sm"
               variant="secondary"
               :disabled="page === 1"
-              @click="page--"
               aria-label="Previous Page"
+              @click="page--"
             >
               Prev
             </Button>
@@ -127,8 +172,8 @@ onMounted(() => {
               size="sm"
               variant="secondary"
               :disabled="page === totalPages"
-              @click="page++"
               aria-label="Next Page"
+              @click="page++"
             >
               Next
             </Button>

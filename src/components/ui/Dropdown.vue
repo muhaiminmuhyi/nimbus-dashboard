@@ -1,7 +1,7 @@
 <script setup>
-import { ref, onMounted, onBeforeUnmount } from "vue";
+import { onBeforeUnmount, onMounted, ref } from "vue";
 
-const props = defineProps({
+defineProps({
   items: {
     type: Array,
     required: true,
@@ -42,7 +42,10 @@ onBeforeUnmount(() => {
 });
 </script>
 <template>
-  <div ref="wrapper" class="relative inline-block">
+  <div
+    ref="wrapper"
+    class="relative inline-block"
+  >
     <!-- Trigger -->
     <div @click="toggle">
       <slot name="trigger" />
@@ -62,7 +65,10 @@ onBeforeUnmount(() => {
         class="absolute right-0 mt-3 w-56 rounded-2xl dark:bg-slate-800/80 bg-white backdrop-blur-xl shadow-2xl ring-1 ring-white/10"
       >
         <ul class="">
-          <li v-for="item in items" :key="item.key">
+          <li
+            v-for="item in items"
+            :key="item.key"
+          >
             <button
               class="w-full px-6 py-2.5 text-left dark:text-slate-300 text-slate-600 hover:dark:text-white hover:text-slate-900 hover:dark:bg-white/5 hover:bg-slate-500/5 hover:rounded-2xl transition"
               :class="item.danger && 'text-amber-400 hover:text-red-300 hover:bg-red-500/10'"

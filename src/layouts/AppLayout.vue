@@ -47,7 +47,10 @@ defineProps<{ title: string }>();
             :to="menu.route"
           />
         </template>
-        <div v-else class="px-3 py-2 text-sm text-slate-400 italic">
+        <div
+          v-else
+          class="px-3 py-2 text-sm text-slate-400 italic"
+        >
           No accessible menu
         </div>
       </nav>
@@ -59,11 +62,16 @@ defineProps<{ title: string }>();
         class="h-14 border-b dark:border-b-slate-600 border-b-slate-200 flex items-center justify-between px-6"
         :style="{ backgroundColor: 'rgb(var(--color-surface))' }"
       >
-        <h1 class="font-semibold">{{ title }}</h1>
+        <h1 class="font-semibold">
+          {{ title }}
+        </h1>
 
         <div class="flex items-center gap-3">
           <ThemeToggle />
-          <Dropdown :items="dropdownItems" @select="onSelect">
+          <Dropdown
+            :items="dropdownItems"
+            @select="onSelect"
+          >
             <template #trigger>
               <div class="h-8 w-8 rounded-full bg-slate-400" />
             </template>

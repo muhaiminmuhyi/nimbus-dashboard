@@ -34,8 +34,13 @@ const statusTone = (status: InvoiceStatus) => {
       <!-- Header -->
       <div class="flex items-center justify-between">
         <div>
-          <h2 class="text-lg font-semibold">Invoices</h2>
-          <p class="text-sm" :style="{ color: 'rgb(var(--color-muted))' }">
+          <h2 class="text-lg font-semibold">
+            Invoices
+          </h2>
+          <p
+            class="text-sm"
+            :style="{ color: 'rgb(var(--color-muted))' }"
+          >
             Manage client invoices and payments
           </p>
         </div>
@@ -46,7 +51,10 @@ const statusTone = (status: InvoiceStatus) => {
       <TableSkeleton v-if="loading" />
 
       <!-- Error -->
-      <div v-else-if="error" class="p-10 text-center text-red-600">
+      <div
+        v-else-if="error"
+        class="p-10 text-center text-red-600"
+      >
         {{ error }}
       </div>
 
@@ -60,23 +68,39 @@ const statusTone = (status: InvoiceStatus) => {
         <table class="w-full text-sm">
           <thead class="bg-slate-50 dark:bg-slate-700">
             <tr>
-              <th scope="col" class="px-6 py-3 text-left">Invoice</th>
-              <th class="px-6 py-3 text-left">Client</th>
-              <th class="px-6 py-3 text-left">Amount</th>
-              <th class="px-6 py-3 text-left">Status</th>
-              <th class="px-6 py-3 text-right">Action</th>
+              <th
+                scope="col"
+                class="px-6 py-3 text-left"
+              >
+                Invoice
+              </th>
+              <th class="px-6 py-3 text-left">
+                Client
+              </th>
+              <th class="px-6 py-3 text-left">
+                Amount
+              </th>
+              <th class="px-6 py-3 text-left">
+                Status
+              </th>
+              <th class="px-6 py-3 text-right">
+                Action
+              </th>
             </tr>
           </thead>
 
           <tbody>
             <tr
-              tabindex="0"
-              aria-label="Billing row"
               v-for="invoice in paginatedBillings"
               :key="invoice.id"
+              tabindex="0"
+              aria-label="Billing row"
               class="border-t dark:border-t-slate-600 border-t-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800"
             >
-              <td scope="row" class="px-6 py-3 font-medium">
+              <td
+                scope="row"
+                class="px-6 py-3 font-medium"
+              >
                 {{ invoice.number }}
               </td>
               <td class="px-6 py-3">
@@ -91,8 +115,18 @@ const statusTone = (status: InvoiceStatus) => {
                 </Badge>
               </td>
               <td class="px-6 py-3 text-right space-x-2">
-                <Button size="sm" variant="secondary">View</Button>
-                <Button size="sm" variant="secondary">Download</Button>
+                <Button
+                  size="sm"
+                  variant="secondary"
+                >
+                  View
+                </Button>
+                <Button
+                  size="sm"
+                  variant="secondary"
+                >
+                  Download
+                </Button>
               </td>
             </tr>
           </tbody>
@@ -108,8 +142,8 @@ const statusTone = (status: InvoiceStatus) => {
               size="sm"
               variant="secondary"
               :disabled="page === 1"
-              @click="page--"
               aria-label="Previous Page"
+              @click="page--"
             >
               Prev
             </Button>
@@ -118,8 +152,8 @@ const statusTone = (status: InvoiceStatus) => {
               size="sm"
               variant="secondary"
               :disabled="page === totalPages"
-              @click="page++"
               aria-label="Next Page"
+              @click="page++"
             >
               Next
             </Button>

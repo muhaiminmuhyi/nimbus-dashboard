@@ -1,16 +1,16 @@
 <template>
   <button
     class="px-3 py-1.5 rounded-md text-sm border border-slate-200"
-    @click="toggle"
     :aria-pressed="isDark"
     aria-label="Toggle dark mode"
+    @click="toggle"
   >
     {{ isDark ? '🌙 Dark' : '☀️ Light' }}
   </button>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { onMounted, ref } from 'vue'
 
 const isDark = ref(false)
 

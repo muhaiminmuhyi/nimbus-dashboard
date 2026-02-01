@@ -40,7 +40,9 @@ const formatNumber = (n: number) => new Intl.NumberFormat("id-ID").format(n);
     <div class="space-y-6">
       <div>
         <div class="flex items-center justify-between">
-          <h2 class="text-lg font-semibold">Overview</h2>
+          <h2 class="text-lg font-semibold">
+            Overview
+          </h2>
 
           <div class="flex gap-2">
             <Button
@@ -71,30 +73,49 @@ const formatNumber = (n: number) => new Intl.NumberFormat("id-ID").format(n);
             </Button>
           </div>
         </div>
-        <p class="text-sm" :style="{ color: 'rgb(var(--color-muted))' }">
+        <p
+          class="text-sm"
+          :style="{ color: 'rgb(var(--color-muted))' }"
+        >
           Business performance overview
         </p>
       </div>
 
       <!-- Loading -->
-      <div v-if="loading" class="grid grid-cols-3 gap-4 animate-pulse">
-        <div v-for="n in 3" :key="n" class="h-24 rounded-lg bg-slate-200" />
+      <div
+        v-if="loading"
+        class="grid grid-cols-3 gap-4 animate-pulse"
+      >
+        <div
+          v-for="n in 3"
+          :key="n"
+          class="h-24 rounded-lg bg-slate-200"
+        />
       </div>
 
       <!-- Error -->
-      <div v-else-if="error" class="text-red-600">
+      <div
+        v-else-if="error"
+        class="text-red-600"
+      >
         {{ error }}
       </div>
 
       <!-- KPI Cards -->
-      <div v-else class="grid grid-cols-3 gap-4">
+      <div
+        v-else
+        class="grid grid-cols-3 gap-4"
+      >
         <div
           v-for="kpi in kpis"
           :key="kpi.key"
           class="rounded-lg p-4"
           :style="{ backgroundColor: 'rgb(var(--color-surface))' }"
         >
-          <p class="text-sm" :style="{ color: 'rgb(var(--color-muted))' }">
+          <p
+            class="text-sm"
+            :style="{ color: 'rgb(var(--color-muted))' }"
+          >
             {{ kpi.label }}
           </p>
 
@@ -114,17 +135,29 @@ const formatNumber = (n: number) => new Intl.NumberFormat("id-ID").format(n);
       </div>
 
       <!-- Loading Chart -->
-      <div v-if="loading" class="grid grid-cols-2 gap-6 animate-pulse">
-        <div v-for="n in 2" :key="n" class="h-48 rounded-lg bg-slate-200" />
+      <div
+        v-if="loading"
+        class="grid grid-cols-2 gap-6 animate-pulse"
+      >
+        <div
+          v-for="n in 2"
+          :key="n"
+          class="h-48 rounded-lg bg-slate-200"
+        />
       </div>
 
       <!-- Charts -->
-      <div v-else class="grid grid-cols-2 gap-6">
+      <div
+        v-else
+        class="grid grid-cols-2 gap-6"
+      >
         <div
           class="rounded-lg p-4"
           :style="{ backgroundColor: 'rgb(var(--color-surface))' }"
         >
-          <p class="text-sm mb-2">Revenue Trend</p>
+          <p class="text-sm mb-2">
+            Revenue Trend
+          </p>
           <LineChart :data="revenueSeries" />
         </div>
 
@@ -132,7 +165,9 @@ const formatNumber = (n: number) => new Intl.NumberFormat("id-ID").format(n);
           class="rounded-lg p-4"
           :style="{ backgroundColor: 'rgb(var(--color-surface))' }"
         >
-          <p class="text-sm mb-2">Active Users</p>
+          <p class="text-sm mb-2">
+            Active Users
+          </p>
           <BarChart :data="userSeries" />
         </div>
       </div>
@@ -153,9 +188,9 @@ const formatNumber = (n: number) => new Intl.NumberFormat("id-ID").format(n);
             <input
               type="checkbox"
               :checked="col.visible"
-              @change="toggleColumn(col.key)"
               class="h-4 w-4"
-            />
+              @change="toggleColumn(col.key)"
+            >
             {{ col.label }}
           </label>
         </div>

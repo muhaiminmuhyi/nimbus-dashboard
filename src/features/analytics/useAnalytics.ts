@@ -1,13 +1,13 @@
-import { ref, computed, watch } from "vue";
+import { computed, ref, watch } from "vue";
 import type {
-  KPI,
-  AnalyticsSummary,
-  TimeRange,
-  AnalyticsSeries,
-  AnalyticsRow,
-  SortKey,
-  SortDirection,
   AnalyticsColumn,
+  AnalyticsRow,
+  AnalyticsSeries,
+  AnalyticsSummary,
+  KPI,
+  SortDirection,
+  SortKey,
+  TimeRange,
 } from "./analytics.types";
 
 type SummaryByRange = Record<TimeRange, AnalyticsSummary>;
