@@ -7,7 +7,15 @@ export interface CreateUserForm {
   isActive: boolean;
 }
 
-export interface CreateUserRequest extends Omit<CreateUserForm, 'confirmPassword'> {}
+export interface ModifyUserForm {
+  id: string;
+  name: string;
+  email: string;
+  role_id: string;
+  status: string;
+}
+
+export interface CreateUserRequest extends Omit<CreateUserForm, 'confirmPassword'> { }
 
 export interface StoreUserData {
   name: string;

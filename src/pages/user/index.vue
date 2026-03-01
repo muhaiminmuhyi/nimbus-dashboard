@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, ref } from "vue";
+import { onMounted, onActivated, ref } from "vue";
 import { storeToRefs } from "pinia";
 import AppLayout from "../../layouts/AppLayout.vue";
 import Button from "../../components/ui/Button.vue";
@@ -30,6 +30,11 @@ const showDeleteDialog = ref(false);
 const userToDelete = ref<User | null>(null);
 
 onMounted(() => {
+  fetchUsers();
+});
+
+// Refetch when navigating back to this page (e.g., after updating a user)
+onActivated(() => {
   fetchUsers();
 });
 
@@ -166,6 +171,7 @@ const confirmDelete = async () => {
                     v-if="can('users.update')"
                     size="sm"
                     variant="secondary"
+                    @click="$router.push(`users/update/${user.id}`)"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"

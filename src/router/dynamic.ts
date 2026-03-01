@@ -4,7 +4,6 @@ import { viewMap } from "./viewMap";
 function addRoutesRecursively(router: Router, menus: any[]) {
   menus.forEach((menu) => {
     const component = viewMap[menu.route];
-    
     if (typeof menu.children != "undefined" && menu.children.length > 0) {
       // Add parent route
       if (component) {
@@ -22,8 +21,8 @@ function addRoutesRecursively(router: Router, menus: any[]) {
       menu.children.forEach((child: any) => {
         const childComponent = viewMap[child.route];
         if (!childComponent) return;
-        
-        const childPath = menu.route + "/" + child.route.replace("/", "");
+
+        const childPath = "/" + child.route.replace("/", "");
         const childName = child.route.replaceAll("/", "_");
 
         router.addRoute({

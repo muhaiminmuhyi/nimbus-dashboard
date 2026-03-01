@@ -1,6 +1,6 @@
 import http from '../lib/http';
 import type { User } from '../types/user';
-import type { StoreUserData } from '../types/createUser';
+import type { ModifyUserForm, StoreUserData } from '../types/createUser';
 
 export interface FetchUsersResponse {
   data: {
@@ -18,6 +18,10 @@ export interface CreateUserResponse {
   };
 }
 
+export interface UserDetailResponse {
+  data: User;
+}
+
 export interface SearchRolesResponse {
   data: {
     id: string;
@@ -29,6 +33,16 @@ export interface SearchRolesResponse {
 export const userService = {
   async fetchUsers(params: { page: number; limit: number }): Promise<FetchUsersResponse> {
     const res = await http.get('/auth/users', { params });
+    return res.data;
+  },
+
+  async getUserDetail(userId: string): Promise<UserDetailResponse> {
+    const res = await http.get('/auth/users/detail', { params: { user_id: userId } });
+    return res.data;
+  },
+
+  async updateUser(userId: string, data: ModifyUserForm): Promise<CreateUserResponse> {
+    const res = await http.put(`/auth/users?user_id=${userId}`, data);
     return res.data;
   },
 
