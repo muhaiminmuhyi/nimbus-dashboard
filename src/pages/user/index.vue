@@ -54,14 +54,20 @@ const confirmDelete = async () => {
 
   try {
     await store.deleteUser(userToDelete.value.id);
-    toast.success('User deleted successfully');
+    toast.success("User deleted successfully");
     closeDeleteDialog();
     // Optionally refetch users or show success message
     await fetchUsers();
   } catch (error: unknown) {
     // Show user-friendly error message from interceptor
-    const axiosError = error as { userFriendlyMessage?: string; response?: { data?: { message?: string } } };
-    const errorMessage = axiosError.userFriendlyMessage || axiosError.response?.data?.message || 'Failed to delete user';
+    const axiosError = error as {
+      userFriendlyMessage?: string;
+      response?: { data?: { message?: string } };
+    };
+    const errorMessage =
+      axiosError.userFriendlyMessage ||
+      axiosError.response?.data?.message ||
+      "Failed to delete user";
     // For now, we'll just log it. You can integrate with your toast system
     toast.error(errorMessage);
   }
@@ -73,13 +79,8 @@ const confirmDelete = async () => {
       <!-- Header -->
       <div class="flex items-center justify-between">
         <div>
-          <h2 class="text-lg font-semibold">
-            Users
-          </h2>
-          <p
-            class="text-sm"
-            :style="{ color: 'rgb(var(--color-muted))' }"
-          >
+          <h2 class="text-lg font-semibold">Users</h2>
+          <p class="text-sm" :style="{ color: 'rgb(var(--color-muted))' }">
             Manage access users and the role for users
           </p>
         </div>
@@ -89,10 +90,7 @@ const confirmDelete = async () => {
         >
           Create Users
         </Button>
-        <p
-          v-if="!can('users.create')"
-          class="text-xs text-slate-400 mt-1"
-        >
+        <p v-if="!can('users.create')" class="text-xs text-slate-400 mt-1">
           You don’t have permission to perform this action
         </p>
       </div>
@@ -101,10 +99,7 @@ const confirmDelete = async () => {
       <TableSkeleton v-if="loading" />
 
       <!-- Error -->
-      <div
-        v-else-if="error"
-        class="p-10 text-center text-red-600"
-      >
+      <div v-else-if="error" class="p-10 text-center text-red-600">
         {{ error }}
       </div>
 
@@ -119,24 +114,11 @@ const confirmDelete = async () => {
           <table class="w-full text-sm">
             <thead class="bg-slate-50 dark:bg-slate-700">
               <tr>
-                <th
-                  scope="col"
-                  class="px-6 py-3 text-left"
-                >
-                  Name
-                </th>
-                <th class="px-6 py-3 text-left">
-                  Email
-                </th>
-                <th class="px-6 py-3 text-left">
-                  Role
-                </th>
-                <th class="px-6 py-3 text-left">
-                  Status
-                </th>
-                <th class="px-6 py-3 text-right">
-                  Action
-                </th>
+                <th scope="col" class="px-6 py-3 text-left">Name</th>
+                <th class="px-6 py-3 text-left">Email</th>
+                <th class="px-6 py-3 text-left">Role</th>
+                <th class="px-6 py-3 text-left">Status</th>
+                <th class="px-6 py-3 text-right">Action</th>
               </tr>
             </thead>
 
@@ -149,10 +131,7 @@ const confirmDelete = async () => {
                 aria-label="User row"
                 class="border-t dark:border-t-slate-600 border-t-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800"
               >
-                <td
-                  scope="row"
-                  class="px-6 py-3"
-                >
+                <td scope="row" class="px-6 py-3">
                   {{ user.name }}
                 </td>
                 <td class="px-6 py-3 text-slate-600 dark:text-slate-200">
@@ -188,9 +167,9 @@ const confirmDelete = async () => {
                       />
                     </svg>
                   </Button>
-                  <Button 
-                    v-if="can('users.delete')" 
-                    size="sm" 
+                  <Button
+                    v-if="can('users.delete')"
+                    size="sm"
                     variant="danger"
                     @click="openDeleteDialog(user)"
                   >
@@ -257,39 +236,32 @@ const confirmDelete = async () => {
     </div>
 
     <!-- Delete Confirmation Dialog -->
-    <Dialog
-      :open="showDeleteDialog"
-      class="relative z-50"
-    >
-      <div
-        class="fixed inset-0 bg-black/70"
-        aria-hidden="true"
-      />
-      
+    <Dialog :open="showDeleteDialog" class="relative z-50">
+      <div class="fixed inset-0 bg-black/70" aria-hidden="true" />
+
       <div class="fixed inset-0 flex items-center justify-center p-4">
-        <DialogPanel class="mx-auto max-w-sm rounded-lg bg-white dark:bg-gray-800 p-6 shadow-xl">
-          <DialogTitle class="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+        <DialogPanel
+          class="mx-auto max-w-sm rounded-lg bg-white dark:bg-gray-800 p-6 shadow-xl"
+        >
+          <DialogTitle
+            class="text-lg font-semibold text-gray-900 dark:text-white mb-2"
+          >
             Delete User
           </DialogTitle>
-          
-          <DialogDescription class="text-sm text-gray-600 dark:text-gray-300 mb-6">
-            Are you sure you want to delete <strong>{{ userToDelete?.name }}</strong>? 
-            This action cannot be undone.
+
+          <DialogDescription
+            class="text-sm text-gray-600 dark:text-gray-300 mb-6"
+          >
+            Are you sure you want to delete
+            <strong>{{ userToDelete?.name }}</strong
+            >? This action cannot be undone.
           </DialogDescription>
-          
+
           <div class="flex justify-end gap-3">
-            <Button 
-              variant="secondary" 
-              size="sm"
-              @click="closeDeleteDialog"
-            >
+            <Button variant="secondary" size="sm" @click="closeDeleteDialog">
               Cancel
             </Button>
-            <Button 
-              variant="danger" 
-              size="sm"
-              @click="confirmDelete"
-            >
+            <Button variant="danger" size="sm" @click="confirmDelete">
               Delete
             </Button>
           </div>
