@@ -10,6 +10,7 @@
       :type="type"
       :value="modelValue"
       :placeholder="placeholder"
+      v-bind="$attrs"
       class="w-full rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 px-3 py-2 text-slate-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
       @input="handleInput"
       @focus="handleFocus"
@@ -25,8 +26,12 @@
 </template>
 
 <script setup lang="ts">
+defineOptions({
+  inheritAttrs: false
+});
+
 interface Props {
-  type: string;
+  type?: string;
   modelValue: string;
   label?: string;
   placeholder?: string;
@@ -34,7 +39,9 @@ interface Props {
   onInput?: () => void;
 }
 
-const props = defineProps<Props>();
+const props = withDefaults(defineProps<Props>(), {
+  type: 'text'
+});
 
 const emit = defineEmits<{
   'update:modelValue': [value: string];

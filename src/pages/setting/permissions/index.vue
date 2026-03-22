@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { usePermissions } from '../../../features/permissions/usePermissions'
+import { usePermissions } from "../../../features/permissions/usePermissions";
 
-const { roles, modules, permissions } = usePermissions()
+const { roles, modules, permissions } = usePermissions();
 </script>
 
 <template>
@@ -22,14 +22,8 @@ const { roles, modules, permissions } = usePermissions()
       <table class="w-full text-sm">
         <thead class="bg-slate-50 dark:bg-slate-700">
           <tr>
-            <th class="px-6 py-3 text-left">
-              Module
-            </th>
-            <th
-              v-for="role in roles"
-              :key="role"
-              class="px-6 py-3 text-center"
-            >
+            <th class="px-6 py-3 text-left">Module</th>
+            <th v-for="role in roles" :key="role" class="px-6 py-3 text-center">
               {{ role }}
             </th>
           </tr>
@@ -45,16 +39,12 @@ const { roles, modules, permissions } = usePermissions()
               {{ module.label }}
             </td>
 
-            <td
-              v-for="role in roles"
-              :key="role"
-              class="px-6 py-4 text-center"
-            >
+            <td v-for="role in roles" :key="role" class="px-6 py-4 text-center">
               <input
                 v-model="permissions[role][module.key]"
                 type="checkbox"
                 class="h-4 w-4"
-              >
+              />
             </td>
           </tr>
         </tbody>
@@ -62,8 +52,8 @@ const { roles, modules, permissions } = usePermissions()
     </div>
 
     <!-- Debug preview -->
-    <pre class="text-xs bg-slate-900 text-slate-100 p-4 rounded-lg">
-{{ permissions }}
+    <pre class="text-xs bg-slate-900 text-slate-100 p-4 rounded-lg"
+      >{{ permissions }}
     </pre>
   </div>
 </template>
