@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { computed, onMounted } from 'vue';
-import { useRoute, useRouter } from 'vue-router';
+import { computed, onMounted } from "vue";
+import { useRoute, useRouter } from "vue-router";
 
 interface Tab {
   name: string;
@@ -11,18 +11,20 @@ const route = useRoute();
 const router = useRouter();
 
 const tabs: Tab[] = [
-  { name: 'Permissions', path: '/settings/permissions' },
-  { name: 'Roles', path: '/settings/roles' },
-  { name: 'API Keys', path: '/settings/api-keys' },
-  { name: 'Notifications', path: '/settings/notifications' },
+  { name: "Roles", path: "/settings/roles" },
+  // { name: "API Keys", path: "/settings/api-keys" },
+  // { name: "Notifications", path: "/settings/notifications" },
 ];
 
 const activeTab = computed(() => route.path);
 
 // Redirect to permissions if on base settings route
 onMounted(() => {
-  if (route.path === '/settings') {
-    router.replace('/settings/permissions');
+  if (
+    route.path.startsWith("/settings") &&
+    !tabs.some((t) => route.path.startsWith(t.path))
+  ) {
+    router.replace("/settings/roles");
   }
 });
 </script>
@@ -47,10 +49,10 @@ onMounted(() => {
           :key="tab.path"
           :to="tab.path"
           :class="[
-            activeTab === tab.path
+            activeTab.startsWith(tab.path)
               ? 'border-blue-500 text-blue-600 dark:text-blue-400'
               : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 dark:text-gray-400 dark:hover:text-gray-300',
-            'whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm transition-colors'
+            'whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm transition-colors',
           ]"
         >
           {{ tab.name }}
